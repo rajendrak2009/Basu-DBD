@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Image Loading</title>
+    <style>
+        #board{
+  margin: 20px auto;
+  max-width:600px;
+}
+#image-out{
+  display:inline-block;
+  width:49%;
+  margin:2px 0;
+}
+#image-in{
+  width:98%;
+  margin:0 auto;
+}
+#image-in img{
+  width:100%;
+}
+#add-image{
+  float: right;
+  border: none;
+  padding: 5px 12px;
+  margin: 20px 0;
+  background: #004B92;
+  color: white;
+  cursor: pointer;
+}
+
+@media only screen and (max-width:390px){
+  #image-out{
+    width:100%;
+  }
+}
+    </style>
+    <script>
+        //array of images
+const images = ['https://lh3.googleusercontent.com/pw/AP1GczPagBxcOgNDPvdtyUcIkUqasL9GMpebXH0FjYS9llhCd5iYglBw1b4RSKwUV7d_Xpq7feKu-dV8kWHeoHaAqxboVjDjCr4sBDBwqffBeOXyfVqor5E=w2400',
+'https://lh3.googleusercontent.com/pw/AP1GczO_kMvrEuw7GtA4c_FKFFy1Vfd1dE1GV7r8nIywipFWyH2Yu6hE76vMf_2agqudDBCQI2HgBmoFnxyXfv-fflnu4DVrfS_gHPEXdGpLS8GMFK8nasY=w2400',
+'https://lh3.googleusercontent.com/pw/AP1GczOpWSIpENpQDIEZkwuQTZuonottUYqOuXhWTzj97N0k3i--VkBW3u1rtLzMpaY7vmslQlkkW8_meZw19_DeucRQgIlOHlRMV-E0A6A6aYxv0tb2Vd0=w2400',
+'https://lh3.googleusercontent.com/pw/AP1GczPTiAh0DJwFAwyZbg0c9ExdyuC6ZRLDoVaPwzqNFGWhdimRQx7O-dDhKMmw5HOQDIrh_yemQRM8Pq-93m1pTimag1U_-RQWF6Wl3XiqFNU469yEXbw=w2400'];
+
+//listens for clicks
+document.querySelector("#add-image").addEventListener("click", () => {
+  addImage();
+});
+
+//aids in looping through the array
+let x = 0;
+const addImage = () => {
+  //creates a div element
+  let imageOut = document.createElement("div");
+  //sets the id of the div
+  imageOut.setAttribute("id","image-out");
+  let imageIn = document.createElement("div");
+  imageIn.setAttribute("id","image-in");
+  //cereates an image element
+  let img = document.createElement("img");
+  //adds image to the image element
+  img.src=images[x];
+  imageIn.appendChild(img);
+  imageOut.appendChild(imageIn);
+  document.querySelector("#images-container").appendChild(imageOut);
+
+  x++;
+
+  //aids in looping through the array indefinitely
+  if(x==4) x=0;
+};
+    </script>
+</head>
+<body>
+    <div id="board">
+        <div id="images-container">
+          <div id="image-out">
+            <div id="image-in">
+              <img src="https://lh3.googleusercontent.com/pw/AP1GczPTiAh0DJwFAwyZbg0c9ExdyuC6ZRLDoVaPwzqNFGWhdimRQx7O-dDhKMmw5HOQDIrh_yemQRM8Pq-93m1pTimag1U_-RQWF6Wl3XiqFNU469yEXbw=w2400" />
+            </div>
+          </div>
+        </div>
+        <button id="add-image">Add Image</button>
+      </div>
+</body>
+</html>
